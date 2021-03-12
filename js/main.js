@@ -11,28 +11,29 @@ request.open('GET', requestURL);
 request.responseType = 'json';
 request.send();
 
-request.onload = function() {
+request.onload = function () {
     const restaurantes = request.response;
-    
+
     crearObjetos(restaurantes);
 
-  }
+}
 
-  function crearObjetos(jsonObj) {
-     
-      for (var i = 0; i < jsonObj.length; i++) {
-        console.log(jsonObj[i])
+function crearObjetos(jsonObj) {
+
+    for (var i = 0; i < jsonObj.length; i++) {
+
         const myH1 = document.createElement('h1');
         myH1.textContent = jsonObj[i].name;
         header.appendChild(myH1);
-      }
+        console.log(jsonObj[i].products)
+        for (var j = 0; j > jsonObj[i].products.length; j++) {
+            const descripcion = document.createElement('p');
 
-  
-    const myPara = document.createElement('p');
+            descripcion.textContent = jsonObj[i].products[j].description
+            header.appendChild(descripcion)
+        }
+    }
 
-    myPara.textContent = 'name: ' + jsonObj['name'] ;
-    header.appendChild(myPara);
-  }
+}
 
 
-  
