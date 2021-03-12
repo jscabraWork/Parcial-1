@@ -25,12 +25,19 @@ function crearObjetos(jsonObj) {
         const myH1 = document.createElement('h1');
         myH1.textContent = jsonObj[i].name;
         header.appendChild(myH1);
-        console.log(jsonObj[i].products)
-        for (var j = 0; j > jsonObj[i].products.length; j++) {
-            const descripcion = document.createElement('p');
 
-            descripcion.textContent = jsonObj[i].products[j].description
-            header.appendChild(descripcion)
+        var productos = jsonObj[i].products;
+        console.log(productos)
+        for (var j = 0; j < productos.length; j++) {
+            const name = document.createElement('h2');
+            const image = document.createElement('img');
+            const descripcion = document.createElement('p');
+            name.textContent = productos[j].name;
+            descripcion.textContent = productos[j].description;
+            image.src = productos[j].image;
+            header.appendChild(image);
+            header.appendChild(name);
+            header.appendChild(descripcion);
         }
     }
 
