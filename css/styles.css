@@ -1,3 +1,36 @@
+*{
+    font-family: sans-serif;
+}
+
+@font-face {
+    font-family: "Satisfy";
+    src: url('../fonts/Satisfy-Regular.ttf');
+
+}
+
 .centrarTexto{
     text-align: center;
+}
+
+#banner{
+    width: 100%;
+}
+#titulo h1{
+    font-family: "Satisfy";
+}
+
+#carrito img{
+    width:60px;
+    float: right;
+    cursor:pointer;
+}
+
+.clearfix{
+    float: none;
+    clear: both;
+
+}
+.categoria h2{
+    font-weight: bold;
+    padding-bottom: 10px;
 }
