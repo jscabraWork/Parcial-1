@@ -8,6 +8,8 @@
 
 }
 
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
 .centrarTexto{
     text-align: center;
 }
@@ -17,7 +19,7 @@
     
 }
 .interior{
-    height:570px;
+    height:650px;
     margin-bottom: 20px;
 }
 .interior h3{
@@ -31,7 +33,7 @@
     height:200px;
 }
 .descripcion{
-    min-height:140px
+    min-height:200px
 }
 .precio{
     font-weight: bold;
@@ -81,4 +83,110 @@
 
 a{
     cursor: pointer;
+}
+
+#total{
+    text-align: left;
+    font-weight: bold;
+}
+
+#botones {
+    text-align:right
+}
+
+#botones button{
+
+    color: black;
+    border: 1px solid black;
+}
+
+.cancel{
+    background-color: #fa555a;
+    color: black;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+.confirm{
+    background-color: #f5ead9;
+    color: black;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+button {
+  background-color: #47a386;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 25px;
+}
+
+.modal-container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;  
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: opacity 0.3s ease;
+}
+
+.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal2 {
+  background-color: #fff;
+
+  width: 600px;
+  max-width: 100%;
+  padding: 30px 50px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ 
+  z-index:10;
+  
+}
+
+.modal2 h4{
+    font-weight: bold;
+}
+
+.ocultar{
+    z-index: 9;
+}
+.cerrar{
+    text-align: right;
+}
+
+#close2{
+    font-weight: bold;
+    background-color: #fff;
+    border: 0px;
+    color:gray;
+}
+
+footer{
+    text-align: center;
+    font-weight: bold;
+    background-color: #fff;
+    padding: 50px;
+    border-top: 1px solid #ccc;
+    margin-top: 50px;
 }

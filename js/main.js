@@ -1,9 +1,5 @@
 
-const burguers = true;
-const tacos = false;
-const salads = false;
-const desserts = false;
-const drinks = false;
+
 
 const section = document.querySelector('section');
 const carrito = document.getElementById('carrito');
@@ -11,9 +7,9 @@ var contador =0;
 const numero = document.createElement('p');
 numero.textContent = contador + ' items'
 carrito.appendChild(numero);
-
-
-
+const informe = document.getElementById('tablaOrders');
+var total =0;
+var itemNumero=1;
 var listado =[]
 
 const requestURL = 'https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json';
@@ -59,6 +55,7 @@ function crearObjetos(jsonObj) {
         for (var j = 0; j < productos.length; j++) {
 
 
+            
             const col = document.createElement('div');
             col.className += 'col-3 columnas';
             
@@ -73,7 +70,7 @@ function crearObjetos(jsonObj) {
             const price = document.createElement('p');
             const button = document.createElement('button');
       
-            price.textContent ='$'+ productos[j].price;
+            price.textContent = productos[j].price;
             price.className+= 'precio'
 
             name.textContent = productos[j].name;
@@ -85,22 +82,37 @@ function crearObjetos(jsonObj) {
 
             button.className += 'btn btn-dark';
             button.textContent = 'Add to cart';
-            var itemNumero=1;
+            
             button.onclick = function() {
                 contador ++;
                 var encontro = false;
                 numero.textContent = contador + ' items'
-
-                
-                for(var i=0; i < listado.length; i++){
+            
+              
+            for(var i=0; i < listado.length; i++){
                     if(name.textContent == listado[i].descripcion){
                         encontro = true
                         listado[i]={
                             "item":listado[i].item,
                             "qty":listado[i].qty +=1,
                             "descripcion": name.textContent,
-                            "price": price.textContent
+                            "price": price.textContent,
+                            "amount":listado[i].price * (listado[i].qty)
                         }
+
+                        const qty = document.getElementById(listado[i].item+"Qty");
+                        qty.textContent = listado[i].qty;
+
+                        const amou = document.getElementById(listado[i].item+"Amount");
+                        amou.textContent = listado[i].amount;
+                        var agregar = parseFloat(listado[i].price)
+                        total=total+ agregar;
+                        const totalHtml = document.getElementById("total");
+                        const pagar = document.createElement('p')
+                        totalHtml.textContent = "Total: $"+total
+                        totalHtml.appendChild(pagar);
+                       
+
                     }
 
                 }
@@ -110,15 +122,160 @@ function crearObjetos(jsonObj) {
                             "item":itemNumero,
                             "qty":1,
                             "descripcion": name.textContent,
-                            "price": price.textContent
+                            "price": price.textContent,
+                            "amount":price.textContent
                         }
                     )
+                    
+
+                    var agregar = parseFloat(price.textContent)
+                        total=total+ agregar;
+
+                        const totalHtml = document.getElementById("total");
+                        const pagar = document.createElement('p')
+                        totalHtml.textContent = "Total: $"+total
+                        totalHtml.appendChild(pagar);
+
+                        
+                    const  tr = document.createElement('tr');
+                    tr.id +=itemNumero    
+
+                    const thItem = document.createElement('th');
+                    const tdQty = document.createElement('td');
+                    const tdDescription = document.createElement('td');
+                    const tdPrice = document.createElement('td');
+                    const tdAmount = document.createElement('td');
+                    const tdModify = document.createElement('td');
+
+                    thItem.textContent=itemNumero;
+                    tdQty.textContent = 1;
+                    tdDescription.textContent = name.textContent;
+                    tdPrice.textContent = price.textContent;    
+                    tdAmount.textContent = price.textContent
+                    thItem.id +=itemNumero+"Item"
+
+                    tdQty.id +=itemNumero+"Qty"
+                    tdDescription.id +=itemNumero+"Descrip"
+                    tdPrice.id +=itemNumero+"Price"
+                    tdAmount.id +=itemNumero+"Amount"
                     itemNumero+=1;
+                    const mas = document.createElement('button')    
+                    const menos = document.createElement('button')    
+                    mas.textContent="+";
+                    menos.textContent ="-";
+                    mas.className +="btn btn-dark mr-2";
+
+                    mas.onclick=function () {
+                        const qty = document.getElementById(tdQty.id);
+
+                        var x = 0;
+                        for(var i =0; i < listado.length; i++){
+                            if(tr.id== listado[i].item){
+                                x = i
+                            }
+                        }
+                        listado[x]={
+                            "item":listado[x].item,
+                            "qty":listado[x].qty +=1,
+                            "descripcion": name.textContent,
+                            "price": price.textContent,
+                            "amount":listado[x].price * (listado[x].qty)
+                        }
+
+                        
+                        var agregar = parseFloat(listado[x].price)
+                        total=total+ agregar;
+
+                        const totalHtml = document.getElementById("total");
+                        const pagar = document.createElement('p')
+                        totalHtml.textContent = "Total: $"+total
+                        totalHtml.appendChild(pagar);
+                
+ 
+                        
+                        qty.textContent = listado[x].qty;
+                    
+                        const amou = document.getElementById(tdAmount.id);
+                        amou.textContent = listado[x].amount;
+                      
+                        contador++;
+                        numero.textContent = contador + ' items'
+                    }
+
+                    
+
+
+                    menos.className +="btn btn-dark ml-3";
+
+                    menos.onclick=function () {
+                        const qty = document.getElementById(tdQty.id);
+
+                        var x = 0;
+                        for(var i =0; i < listado.length; i++){
+                            if(tr.id== listado[i].item){
+                                x = i
+                            }
+                        }
+                        listado[x]={
+                            "item":listado[x].item,
+                            "qty":listado[x].qty -=1,
+                            "descripcion": name.textContent,
+                            "price": price.textContent,
+                            "amount":listado[x].price * (listado[x].qty)
+                        }
+
+                        var agregar = parseFloat(listado[x].price)
+                        total=total- agregar;
+
+                        const totalHtml = document.getElementById("total");
+                        const pagar = document.createElement('p')
+                        totalHtml.textContent = "Total: $"+total
+                     
+
+                        totalHtml.appendChild(pagar);
+                
+
+                  
+                        qty.textContent = listado[x].qty;
+                    
+                        const amou = document.getElementById(tdAmount.id);
+                        amou.textContent = listado[x].amount;
+                        
+                        contador--;
+                        numero.textContent = contador + ' items'
+
+                        if(listado[x].qty==0){
+                            listado.splice( x, 1 );
+                            const tabla = document.getElementById('tablaOrders');
+                            tabla.removeChild(tr)
+
+               
+                        }
+                        if(listado.length==0){
+                            totalHtml.textContent = "Total: $"+0
+                            total=0;
+                        }
+
+                        
+                    }
+
+                    tdModify.appendChild(mas);
+                    tdModify.appendChild(menos);
+                    tr.appendChild(thItem);
+                    tr.appendChild(tdQty);
+                    tr.appendChild(tdDescription);
+                    tr.appendChild(tdPrice);
+                    tr.appendChild(tdAmount);
+                    tr.appendChild(tdModify);
+                    informe.appendChild(tr);
+
+
+                    
                 }
                 
 
                 
-                console.log(listado)
+                
             };
 
             interior.appendChild(image);
@@ -138,7 +295,7 @@ function mostrar(id) {
     var x = document.getElementById(id);
     
         x.style.display = "flex";
-        console.log(id)
+        
         if(id=='Burguers'){
             var a = document.getElementById('Tacos');
             var b = document.getElementById('Salads');
@@ -222,3 +379,50 @@ function mostrar(id) {
 }
 
   
+const open = document.getElementById('open');
+const modal_container = document.getElementById('modal_container');
+const close = document.getElementById('close');
+const close2 = document.getElementById('close2');
+open.addEventListener('click', () => {
+  modal_container.classList.add('show');  
+});
+
+close.addEventListener('click', () => {
+  modal_container.classList.remove('show');
+});
+
+close2.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+  });
+
+
+
+
+  function cancelar(){
+    
+
+    total =0;
+    for(var i =0; i < listado.length; i++){
+
+        const tabla = document.getElementById('tablaOrders');
+        const tr = document.getElementById(listado[i].item)
+        tabla.removeChild(tr)
+     
+       
+    }
+
+    const totalHtml = document.getElementById("total");
+    const pagar = document.createElement('p')
+    totalHtml.textContent = "Total: $"+total
+    totalHtml.appendChild(pagar);
+    listado =[]
+    contador=0;
+    numero.textContent = contador + ' items';
+    modal_container.classList.remove('show');
+    itemNumero=1;
+  }
+
+
+  function confirmarOrden(){
+      console.log(listado)
+  }

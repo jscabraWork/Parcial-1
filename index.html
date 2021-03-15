@@ -14,7 +14,33 @@
 </head>
 
 <body>
-    <div class="container mt-4">
+
+    <div id="modal_container" class="modal-container">
+        <div class="modal2">
+            <div class="row">
+                <div class="col-6">
+                    <h4 >Cancel the order</h4>
+                </div>
+                <div class="col-6 cerrar">
+                    <button id="close2">
+                        x
+                    </button>
+                </div>
+            </div>
+            <hr>
+
+            <p>
+                Are you sure about cancelling the order?
+            </p>
+            <hr>
+            <div class="modalBotones">
+                <button id="confirmar" onclick="cancelar()" class="btn confirm">Yes, I want to cancel the order</button>
+                <button id="close" class="btn cancel">No, I want to continue adding products</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4 ">
         <div class="row">
             <div class="col-6" id="titulo">
                 <h1>Restaurant y Loungue</h1>
@@ -25,12 +51,12 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-        <div class="col-12" >
-            <hr>
-            <img src="https://i.imgur.com/S8Ffdqa.png"  alt="" id="banner">
-            <hr>
+            <div class="col-12">
+                <hr>
+                <img src="https://i.imgur.com/S8Ffdqa.png" alt="" id="banner">
+                <hr>
+            </div>
         </div>
-    </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -40,46 +66,69 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto p-2">
                     <li class="nav-item active">
-                        <a class="nav-link p-4"  onclick="mostrar('Burguers')">Burgers</a>
+                        <a class="nav-link p-4" onclick="mostrar('Burguers')">Burgers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-4"  onclick="mostrar('Tacos')">Tacos</a>
+                        <a class="nav-link p-4" onclick="mostrar('Tacos')">Tacos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link p-4" onclick="mostrar('Salads')">Salads</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-4"  onclick="mostrar('Desserts')">Desserts</a>
+                        <a class="nav-link p-4" onclick="mostrar('Desserts')">Desserts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-4"  onclick="mostrar('Drinks and Sides')">Drinks & Sides</a>
+                        <a class="nav-link p-4" onclick="mostrar('Drinks and Sides')">Drinks & Sides</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    
-    <section class="container centrarTexto" >
+
+    <section class="container centrarTexto">
         <hr>
 
     </section>
 
-    <div  class="container centrarTexto">
+    <div class="container centrarTexto">
         <div class="row" id="order">
             <div class="col-12">
                 <h2>Order detail</h2>
                 <hr>
             </div>
+
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Modify</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaOrders">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6" id="total">
+
+            </div>
+
+            <div class="col-6" id="botones">
+                <button class="btn cancel" id="open">Cancel</button>
+                <button onclick="confirmarOrden()" class="btn confirm">Confirm Order</button>
+            </div>
         </div>
     </div>
 
-
-
-
-
-
-
+    <footer>
+        <p>Contact us: +57 3102105253 - info@restaurant.com - @restaurant</p>
+    </footer>
 
     <script src="js/main.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
